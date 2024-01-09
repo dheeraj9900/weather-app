@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Station</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <h1 id="heading1" class="container text-center mt-5  alert alert-success">Weather Station</h1>
+    <input id = "cityName"type="input" class="container text-center mt-4 form-control" placeholder="Enter City">
+    <button id="submit_buttton" class="container btn btn-dark mt-5" onclick="fetchTemperature()">Submit</button>
+    <h2 id="displayedTemp" class="container text-center mt-4"></h2>
+  </div>
+  <script>
+    function fetchTemperature(){
+        const city = document.getElementById('cityName').value
+        console.log(city);
+        
+        var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=492ac9c5809a30780347397e338e8d00&units=metric`
+        fetch(url)
+        .then(response =>response.json())
+        .then(data => {
+        
+            var Temp = data['main']['temp']
+            console.log(Temp)
+            document.getElementById('displayedTemp').innerHTML= `Temp = ${Temp} &deg;C`;
+        
+    })
+
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
